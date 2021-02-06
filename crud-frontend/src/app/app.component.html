@@ -1,0 +1,19 @@
+<div class="d-flex justify-content-end p-3">
+    <button class="btn btn-primary mt-3" (click)="addTodo()">Add record</button>
+</div>
+<div class="card m-3 p-3" *ngFor="let todo of allTodo">
+    <div>
+        <div>
+            <span>Title: </span>
+            <span>{{todo.title}}</span>
+        </div>
+        <div>
+            <span>details: </span>
+            <span>{{todo.details}}</span>
+        </div>
+    </div>
+    <div class="action-container mt-3">
+        <button class="btn btn-info">edit</button>
+        <button class="btn btn-danger ml-3" (click)="deleteTodo(todo._id)">delete</button>
+    </div>
+</div>

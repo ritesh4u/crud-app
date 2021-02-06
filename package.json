@@ -1,0 +1,11 @@
+{
+    "scripts": {
+        "start": "concurrently npm:start-frontend npm:start-backend",
+        "start-frontend": "cd crud-frontend && ng serve",
+        "start-backend": "cd api && yarn start"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "concurrently": "^5.3.0"
+    }
+}
