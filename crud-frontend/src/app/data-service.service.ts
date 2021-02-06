@@ -41,6 +41,16 @@ export class DataService {
       }
     });
   }
+  updateTodo(_id: string, title: string, details: string) {
+    this.httpClient.put<Todo>(this.TODO_PATH, { _id, title, details }).subscribe(result => {
+      console.log(result);
+      let todo = this.allTodo.value.find(it => it._id == _id);
+      todo.title = title;
+      todo.details = details;
+      let newTodoList = [...this.allTodo.value];
+      this.allTodo.next(newTodoList);
+    });
+  }
 }
 interface CommonResponse {
   success: boolean;

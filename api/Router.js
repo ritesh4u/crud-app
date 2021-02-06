@@ -22,7 +22,7 @@ router.get('/todo', (req, res) => {
 });
 router.post('/todo', (req, res) => {
     if (!req.body.title || !req.body.details) {
-        res.send({ error: true, message: 'title and details required' });
+        res.send({ sucess: false, message: 'title and details required' });
         return;
     }
     var todo = new TodoSchema();
@@ -54,15 +54,17 @@ router.delete('/todo', (req, res) => {
     });
 });
 router.put('/todo', (req, res) => {
-    var todo = new TodoSchema();
-    todo.title = "title";
-    todo.details = "details";
-    todo.save((err, data) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.send(data);
+    if (!req.body._id || !req.body.title || !req.body.details) {
+        res.send({ sucess: false, message: '_id, title, details required' });
+        return;
+    }
+    TodoSchema.findOneAndUpdate({ _id: mongoose.Types.ObjectId(req.body._id) }, {
+        $set: {
+            title: req.body.title,
+            details: req.body.details
         }
+    }, { new: true, useFindAndModify: false }, (error, result) => {
+        res.send(result);
     });
 });
 
